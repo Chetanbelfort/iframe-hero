@@ -1,0 +1,14 @@
+'use client'
+
+import { cn } from "@/lib/utils"
+
+export function Spotlight({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]",
+        className
+      )}
+    />
+  )
+}
