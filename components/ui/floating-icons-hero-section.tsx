@@ -30,14 +30,14 @@ function FloatingIcon({
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  const springX = useSpring(x, { stiffness: 110, damping: 18 })
-  const springY = useSpring(y, { stiffness: 110, damping: 18 })
+  const springX = useSpring(x, { stiffness: 120, damping: 18 })
+  const springY = useSpring(y, { stiffness: 120, damping: 18 })
 
   return (
     <motion.div
       drag
       dragMomentum
-      dragElastic={0.85}
+      dragElastic={0.9}
       whileTap={{ scale: 1.15 }}
       style={{ x: springX, y: springY }}
       initial={{ opacity: 0, scale: 0.6 }}
@@ -53,7 +53,6 @@ function FloatingIcon({
           border border-black/10
           shadow-xl
           flex items-center justify-center
-          pointer-events-auto
         "
         animate={{
           y: [0, -10, 0, 10, 0],
@@ -92,40 +91,72 @@ export default function FloatingIconsHero({
         touch-pan-y
         overscroll-none
       "
-      style={{
-        WebkitOverflowScrolling: 'touch',
-      }}
     >
       {/* ICON LAYER */}
-      <div className="absolute inset-0 pointer-events-auto">
+      <div className="absolute inset-0">
         {icons.map((icon, index) => (
           <FloatingIcon key={icon.id} iconData={icon} index={index} />
         ))}
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 text-center px-4 pointer-events-auto">
-        <h1 className="text-5xl md:text-7xl font-bold text-black">
-          {title}
+      <div className="relative z-10 max-w-3xl text-center px-5">
+        {/* HEADLINE */}
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-black leading-tight">
+          Build & Sell AI Agent Solutions
+          <br />
+          <span className="text-black/60">
+            Without Learning AI, Coding, or n8n
+          </span>
         </h1>
 
-        <p className="mt-6 max-w-xl mx-auto text-lg text-black/70">
-          {subtitle}
+        {/* SUB-HEADLINE */}
+        <p className="mt-6 text-lg sm:text-xl text-black/70">
+          We build, manage, and support AI agents for your clients.
+          <br />
+          You focus on sales. We handle everything technical — end-to-end.
         </p>
 
-        <div className="mt-10">
+        {/* SUPPORTING LINE */}
+        <p className="mt-4 text-base sm:text-lg italic text-black/60">
+          This is not a course.
+          <br />
+          This is a done-for-you AI delivery & partner system.
+        </p>
+
+        {/* CTA BUTTONS */}
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          {/* PRIMARY CTA */}
           <Button
             asChild
             size="lg"
             className="
               bg-black text-white
               px-10 py-6
+              text-base sm:text-lg
               shadow-lg
               hover:bg-black/90
             "
           >
             <a href={ctaHref} target="_parent">
-              {ctaText}
+              👉 Become an Authorized Partner
+            </a>
+          </Button>
+
+          {/* SECONDARY CTA */}
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="
+              border-black text-black
+              px-10 py-6
+              text-base sm:text-lg
+              hover:bg-black/5
+            "
+          >
+            <a href="/ai-agents" target="_parent">
+              👉 Get AI Agents Built for My Business
             </a>
           </Button>
         </div>
