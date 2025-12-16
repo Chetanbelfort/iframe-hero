@@ -92,6 +92,13 @@ export default function FloatingIconsHero({
         overscroll-none
       "
     >
+      {/* TOP BRAND */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+        <p className="text-xs sm:text-sm tracking-wide text-black/60 font-semibold">
+          ALL India AI
+        </p>
+      </div>
+
       {/* ICON LAYER */}
       <div className="absolute inset-0">
         {icons.map((icon, index) => (
@@ -104,11 +111,12 @@ export default function FloatingIconsHero({
         {/* HEADLINE */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-black leading-tight">
           Build & Sell AI Agent Solutions
-          <br />
-          <span className="text-black/60">
-            Without Learning AI, Coding, or n8n
-          </span>
         </h1>
+
+        {/* SMALLER SECOND LINE */}
+        <p className="mt-2 text-lg sm:text-xl md:text-2xl text-black/60 font-medium">
+          Without Learning AI, Coding, or n8n
+        </p>
 
         {/* SUB-HEADLINE */}
         <p className="mt-6 text-lg sm:text-xl text-black/70">
@@ -125,7 +133,7 @@ export default function FloatingIconsHero({
         </p>
 
         {/* CTA BUTTONS */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
           {/* PRIMARY CTA */}
           <Button
             asChild
@@ -136,6 +144,7 @@ export default function FloatingIconsHero({
               text-base sm:text-lg
               shadow-lg
               hover:bg-black/90
+              w-full sm:w-auto
             "
           >
             <a href={ctaHref} target="_parent">
@@ -143,7 +152,7 @@ export default function FloatingIconsHero({
             </a>
           </Button>
 
-          {/* SECONDARY CTA */}
+          {/* SECONDARY CTA (FIXED FOR MOBILE) */}
           <Button
             asChild
             size="lg"
@@ -153,6 +162,7 @@ export default function FloatingIconsHero({
               px-10 py-6
               text-base sm:text-lg
               hover:bg-black/5
+              w-full sm:w-auto
             "
           >
             <a href="/ai-agents" target="_parent">
