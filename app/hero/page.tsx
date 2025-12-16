@@ -1,11 +1,7 @@
-import HeroSection from "@/components/sections/HeroSection"
-import StuckRealitySection from "@/components/sections/StuckRealitySection"
+'use client'
 
-export default function Page() {
-  return (
-    <>
-      <HeroSection />
-      <StuckRealitySection />
-    </>
-  )
+import HeroSection from '@/components/sections/HeroSection'
+
+export default function IframeHeroPage() {
+  return <HeroSection />
 }
