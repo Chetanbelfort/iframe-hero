@@ -36,9 +36,8 @@ function FloatingIcon({
   return (
     <motion.div
       drag
-      dragMomentum
       dragElastic={0.9}
-      whileTap={{ scale: 1.15 }}
+      whileTap={{ scale: 1.12 }}
       style={{ x: springX, y: springY }}
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -51,15 +50,15 @@ function FloatingIcon({
           rounded-3xl
           bg-white
           border border-black/10
-          shadow-xl
+          shadow-[0_20px_40px_rgba(0,0,0,0.08)]
           flex items-center justify-center
         "
         animate={{
           y: [0, -10, 0, 10, 0],
-          rotate: [0, 6, 0, -6, 0],
+          rotate: [0, 5, 0, -5, 0],
         }}
         transition={{
-          duration: 4 + Math.random() * 3,
+          duration: 5 + Math.random() * 3,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
@@ -73,10 +72,6 @@ function FloatingIcon({
 /* ---------------- HERO ---------------- */
 
 export default function FloatingIconsHero({
-  title,
-  subtitle,
-  ctaText,
-  ctaHref,
   icons,
 }: FloatingIconsHeroProps) {
   return (
@@ -88,15 +83,13 @@ export default function FloatingIconsHero({
         bg-white
         overflow-hidden
         flex items-center justify-center
-        touch-pan-y
-        overscroll-none
       "
     >
-      {/* TOP BRAND */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
-        <p className="text-xs sm:text-sm tracking-wide text-black/60 font-semibold">
-          ALL India AI
-        </p>
+      {/* BRAND */}
+      <div className="absolute top-5 left-1/2 -translate-x-1/2 z-20">
+        <span className="text-xs tracking-[0.2em] text-black/50 font-medium">
+          ALL INDIA AI
+        </span>
       </div>
 
       {/* ICON LAYER */}
@@ -107,66 +100,70 @@ export default function FloatingIconsHero({
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-3xl text-center px-5">
+      <div className="relative z-10 max-w-3xl text-center px-6">
         {/* HEADLINE */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-black leading-tight">
-          Build & Sell AI Agent Solutions
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-black tracking-tight leading-tight">
+          Build once.
+          <br />
+          Deliver AI everywhere.
         </h1>
 
-        {/* SMALLER SECOND LINE */}
-        <p className="mt-2 text-lg sm:text-xl md:text-2xl text-black/60 font-medium">
-          Without Learning AI, Coding, or n8n
+        {/* SUBLINE */}
+        <p className="mt-4 text-lg sm:text-xl md:text-2xl text-black/60 font-normal">
+          Without learning AI, automation tools, or technical systems.
         </p>
 
-        {/* SUB-HEADLINE */}
-        <p className="mt-6 text-lg sm:text-xl text-black/70">
-          We build, manage, and support AI agents for your clients.
+        {/* DESCRIPTION */}
+        <p className="mt-8 text-base sm:text-lg text-black/70 leading-relaxed">
+          We design, build, and operate AI agents for your clients.
           <br />
-          You focus on sales. We handle everything technical — end-to-end.
+          You focus on relationships. We take care of the technology.
         </p>
 
-        {/* SUPPORTING LINE */}
-        <p className="mt-4 text-base sm:text-lg italic text-black/60">
-          This is not a course.
+        {/* SUPPORTING STATEMENT */}
+        <p className="mt-4 text-sm sm:text-base text-black/50 italic">
+          Not a course. Not a platform.
           <br />
-          This is a done-for-you AI delivery & partner system.
+          A fully managed AI delivery partnership.
         </p>
 
-        {/* CTA BUTTONS */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-          {/* PRIMARY CTA */}
+        {/* CTA */}
+        <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* PRIMARY */}
           <Button
             asChild
             size="lg"
             className="
               bg-black text-white
-              px-10 py-6
+              px-12 py-6
               text-base sm:text-lg
-              shadow-lg
+              rounded-full
+              shadow-md
               hover:bg-black/90
               w-full sm:w-auto
             "
           >
-            <a href={ctaHref} target="_parent">
-              👉 Become an Authorized Partner
+            <a href="/partner" target="_parent">
+              Become a Partner
             </a>
           </Button>
 
-          {/* SECONDARY CTA (FIXED FOR MOBILE) */}
+          {/* SECONDARY */}
           <Button
             asChild
             size="lg"
             variant="outline"
             className="
-              border-black text-black
-              px-10 py-6
+              border-black/30 text-black
+              px-12 py-6
               text-base sm:text-lg
+              rounded-full
               hover:bg-black/5
               w-full sm:w-auto
             "
           >
             <a href="/ai-agents" target="_parent">
-              👉 Get AI Agents Built for My Business
+              Build AI for My Business
             </a>
           </Button>
         </div>
