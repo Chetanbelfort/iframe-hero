@@ -5,8 +5,6 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
-/* -------------------------------- TYPES -------------------------------- */
-
 interface IconProps {
   id: number
   icon: React.FC<React.SVGProps<SVGSVGElement>>
@@ -21,53 +19,45 @@ export interface FloatingIconsHeroProps {
   icons: IconProps[]
 }
 
-/* ------------------------------- ICON -------------------------------- */
+/* ---------------- ICON ---------------- */
 
 function FloatingIcon({
   iconData,
   index,
-  containerRef,
 }: {
   iconData: IconProps
   index: number
-  containerRef: React.RefObject<HTMLDivElement>
 }) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  const springX = useSpring(x, { stiffness: 180, damping: 18 })
-  const springY = useSpring(y, { stiffness: 180, damping: 18 })
+  const springX = useSpring(x, { stiffness: 120, damping: 18 })
+  const springY = useSpring(y, { stiffness: 120, damping: 18 })
 
   return (
     <motion.div
-      drag
-      dragConstraints={containerRef}
-      dragElastic={0.65}
-      dragMomentum
-      dragTransition={{ power: 0.2, timeConstant: 200 }}
       style={{ x: springX, y: springY }}
-      whileTap={{ scale: 1.12 }}
+      drag
+      dragMomentum
+      dragElastic={0.8}
+      whileTap={{ scale: 1.15 }}
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05 }}
-      className={cn(
-        'absolute cursor-grab active:cursor-grabbing touch-none',
-        iconData.className
-      )}
+      className={cn('absolute cursor-grab active:cursor-grabbing', iconData.className)}
     >
-      {/* Always floating (mobile + desktop) */}
       <motion.div
         className="
-          flex items-center justify-center
           w-16 h-16 md:w-20 md:h-20
           rounded-3xl
           bg-white
           border border-black/10
           shadow-xl
+          flex items-center justify-center
         "
         animate={{
           y: [0, -10, 0, 10, 0],
-          rotate: [0, 5, 0, -5, 0],
+          rotate: [0, 6, 0, -6, 0],
         }}
         transition={{
           duration: 4 + Math.random() * 3,
@@ -81,7 +71,7 @@ function FloatingIcon({
   )
 }
 
-/* ------------------------------- HERO -------------------------------- */
+/* ---------------- HERO ---------------- */
 
 export default function FloatingIconsHero({
   title,
@@ -89,30 +79,22 @@ export default function FloatingIconsHero({
   ctaText,
   ctaHref,
   icons,
-  className,
-}: FloatingIconsHeroProps & { className?: string }) {
-  const containerRef = React.useRef<HTMLDivElement>(null)
-
+}: FloatingIconsHeroProps) {
   return (
     <section
-      className={cn(
-        // ✅ WHITE THEME EVERYWHERE
-        'relative w-full h-screen min-h-[700px] bg-white overflow-hidden flex items-center justify-center',
-        className
-      )}
+      className="
+        relative
+        w-screen h-[100svh]
+        bg-white
+        overflow-hidden
+        flex items-center justify-center
+        isolate
+      "
     >
-      {/* FULL SCREEN DRAG AREA */}
-      <div
-        ref={containerRef}
-        className="absolute inset-0 overflow-visible touch-none"
-      >
+      {/* ICON LAYER */}
+      <div className="absolute inset-0">
         {icons.map((icon, index) => (
-          <FloatingIcon
-            key={icon.id}
-            iconData={icon}
-            index={index}
-            containerRef={containerRef}
-          />
+          <FloatingIcon key={icon.id} iconData={icon} index={index} />
         ))}
       </div>
 
@@ -130,12 +112,7 @@ export default function FloatingIconsHero({
           <Button
             asChild
             size="lg"
-            className="
-              px-10 py-6
-              bg-black text-white
-              hover:bg-black/90
-              shadow-lg
-            "
+            className="bg-black text-white px-10 py-6 shadow-lg"
           >
             <a href={ctaHref}>{ctaText}</a>
           </Button>
