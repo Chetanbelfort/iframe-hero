@@ -16,31 +16,26 @@ import {
   Rocket,
 } from 'lucide-react'
 
-/* -------------------------------- ICON CONFIG -------------------------------- */
 /*
-  🔑 RULE:
-  - Icons WITHOUT `hidden sm:block` → visible on mobile + desktop
-  - Icons WITH `hidden sm:block`   → hidden on mobile, visible on desktop
+  RULE:
+  - No `hidden sm:block` → mobile + desktop
+  - With `hidden sm:block` → desktop only
 */
 
 const icons: FloatingIconsHeroProps['icons'] = [
-  // ✅ MOBILE + DESKTOP ICONS (6–8 max)
-  { id: 1, icon: Brain, className: 'top-[10%] left-[10%]' },
-  { id: 2, icon: Bot, className: 'top-[20%] right-[10%]' },
-  { id: 3, icon: Workflow, className: 'top-[70%] left-[12%]' },
-  { id: 4, icon: Zap, className: 'bottom-[15%] right-[12%]' },
-  { id: 5, icon: IndianRupee, className: 'top-[45%] left-[6%]' },
-  { id: 6, icon: LineChart, className: 'top-[55%] right-[6%]' },
+  // MOBILE + DESKTOP (spread to corners)
+  { id: 1, icon: Brain, className: 'top-[4%] left-[4%]' },
+  { id: 2, icon: Bot, className: 'top-[4%] right-[4%]' },
+  { id: 3, icon: Workflow, className: 'bottom-[4%] left-[4%]' },
+  { id: 4, icon: Zap, className: 'bottom-[4%] right-[4%]' },
+  { id: 5, icon: IndianRupee, className: 'top-[45%] left-[2%]' },
+  { id: 6, icon: LineChart, className: 'top-[45%] right-[2%]' },
 
-  // 🖥️ DESKTOP-ONLY ICONS
-  { id: 7, icon: Cloud, className: 'hidden sm:block top-[5%] left-[35%]' },
-  { id: 8, icon: Rocket, className: 'hidden sm:block top-[80%] right-[45%]' },
-
-  // 👇 THIS IS YOUR EXACT LINE (DESKTOP ONLY)
+  // DESKTOP ONLY (extra richness)
+  { id: 7, icon: Cloud, className: 'hidden sm:block top-[10%] left-[30%]' },
+  { id: 8, icon: Rocket, className: 'hidden sm:block bottom-[12%] right-[35%]' },
   { id: 9, icon: Database, className: 'hidden sm:block top-[70%] left-[30%]' },
 ]
-
-/* -------------------------------- HERO -------------------------------- */
 
 export default function HeroSection() {
   return (

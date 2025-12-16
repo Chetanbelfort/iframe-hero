@@ -5,7 +5,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
-/* -------------------------------- ICON TYPES -------------------------------- */
+/* -------------------------------- TYPES -------------------------------- */
 
 interface IconProps {
   id: number
@@ -21,95 +21,69 @@ export interface FloatingIconsHeroProps {
   icons: IconProps[]
 }
 
-/* ------------------------------- ICON LOGIC -------------------------------- */
+/* ------------------------------- ICON -------------------------------- */
 
 function FloatingIcon({
-  mouseX,
-  mouseY,
   iconData,
   index,
-  dragConstraints,
+  containerRef,
 }: {
-  mouseX: React.MutableRefObject<number>
-  mouseY: React.MutableRefObject<number>
   iconData: IconProps
   index: number
-  dragConstraints: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement>
 }) {
-  const ref = React.useRef<HTMLDivElement>(null)
-
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  const springX = useSpring(x, { stiffness: 300, damping: 20 })
-  const springY = useSpring(y, { stiffness: 300, damping: 20 })
-
-  /* Mouse / Touch Repel Logic */
-  React.useEffect(() => {
-    const handleMove = () => {
-      if (!ref.current) return
-
-      const rect = ref.current.getBoundingClientRect()
-      const dx = mouseX.current - (rect.left + rect.width / 2)
-      const dy = mouseY.current - (rect.top + rect.height / 2)
-      const distance = Math.sqrt(dx * dx + dy * dy)
-
-      if (distance < 150) {
-        const force = (1 - distance / 150) * 50
-        x.set(-dx * force * 0.01)
-        y.set(-dy * force * 0.01)
-      }
-    }
-
-    window.addEventListener('mousemove', handleMove)
-    window.addEventListener('touchmove', handleMove)
-
-    return () => {
-      window.removeEventListener('mousemove', handleMove)
-      window.removeEventListener('touchmove', handleMove)
-    }
-  }, [mouseX, mouseY, x, y])
+  const springX = useSpring(x, { stiffness: 180, damping: 18 })
+  const springY = useSpring(y, { stiffness: 180, damping: 18 })
 
   return (
     <motion.div
-      ref={ref}
-      style={{ x: springX, y: springY }}
       drag
-      dragConstraints={dragConstraints}
-      dragElastic={0.45}
-      dragMomentum={true}
+      dragConstraints={containerRef}
+      dragElastic={0.65}
+      dragMomentum
+      dragTransition={{ power: 0.2, timeConstant: 200 }}
+      style={{ x: springX, y: springY }}
       whileTap={{ scale: 1.12 }}
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: index * 0.06, duration: 0.5 }}
+      transition={{ delay: index * 0.05 }}
       className={cn(
-        'absolute touch-none cursor-grab active:cursor-grabbing',
+        'absolute cursor-grab active:cursor-grabbing touch-none',
         iconData.className
       )}
     >
-      {/* Continuous floating animation */}
+      {/* Always floating (mobile + desktop) */}
       <motion.div
-        className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-card/80 backdrop-blur-md border border-border/10 shadow-xl"
+        className="
+          flex items-center justify-center
+          w-16 h-16 md:w-20 md:h-20
+          rounded-3xl
+          bg-white
+          border border-black/10
+          shadow-xl
+        "
         animate={{
-          y: [0, -12, 0, 12, 0],
-          x: [0, 6, 0, -6, 0],
-          rotate: [0, 6, 0, -6, 0],
+          y: [0, -10, 0, 10, 0],
+          rotate: [0, 5, 0, -5, 0],
         }}
         transition={{
-          duration: 4,
+          duration: 4 + Math.random() * 3,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
       >
-        <iconData.icon className="w-8 h-8 md:w-10 md:h-10 text-foreground" />
+        <iconData.icon className="w-8 h-8 md:w-10 md:h-10 text-black" />
       </motion.div>
     </motion.div>
   )
 }
 
-/* ------------------------------- MAIN HERO -------------------------------- */
+/* ------------------------------- HERO -------------------------------- */
 
-function FloatingIconsHero({
+export default function FloatingIconsHero({
   title,
   subtitle,
   ctaText,
@@ -117,51 +91,52 @@ function FloatingIconsHero({
   icons,
   className,
 }: FloatingIconsHeroProps & { className?: string }) {
-  const mouseX = React.useRef(0)
-  const mouseY = React.useRef(0)
   const containerRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <section
-      onMouseMove={(e) => {
-        mouseX.current = e.clientX
-        mouseY.current = e.clientY
-      }}
-      onTouchMove={(e) => {
-        mouseX.current = e.touches[0].clientX
-        mouseY.current = e.touches[0].clientY
-      }}
       className={cn(
-        'relative w-full h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-background',
+        // ✅ WHITE THEME EVERYWHERE
+        'relative w-full h-screen min-h-[700px] bg-white overflow-hidden flex items-center justify-center',
         className
       )}
     >
-      {/* Floating Icons Layer */}
-      <div ref={containerRef} className="absolute inset-0">
+      {/* FULL SCREEN DRAG AREA */}
+      <div
+        ref={containerRef}
+        className="absolute inset-0 overflow-visible touch-none"
+      >
         {icons.map((icon, index) => (
           <FloatingIcon
             key={icon.id}
-            mouseX={mouseX}
-            mouseY={mouseY}
             iconData={icon}
             index={index}
-            dragConstraints={containerRef}
+            containerRef={containerRef}
           />
         ))}
       </div>
 
-      {/* Foreground Content */}
+      {/* CONTENT */}
       <div className="relative z-10 text-center px-4">
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-7xl font-bold text-black">
           {title}
         </h1>
 
-        <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground">
+        <p className="mt-6 max-w-xl mx-auto text-lg text-black/70">
           {subtitle}
         </p>
 
         <div className="mt-10">
-          <Button asChild size="lg">
+          <Button
+            asChild
+            size="lg"
+            className="
+              px-10 py-6
+              bg-black text-white
+              hover:bg-black/90
+              shadow-lg
+            "
+          >
             <a href={ctaHref}>{ctaText}</a>
           </Button>
         </div>
@@ -169,5 +144,3 @@ function FloatingIconsHero({
     </section>
   )
 }
-
-export default FloatingIconsHero
