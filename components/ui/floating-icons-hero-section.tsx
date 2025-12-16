@@ -28,21 +28,25 @@ function FloatingIcon({
   mouseY,
   iconData,
   index,
+  dragConstraints,
 }: {
   mouseX: React.MutableRefObject<number>
   mouseY: React.MutableRefObject<number>
   iconData: IconProps
   index: number
+  dragConstraints: React.RefObject<HTMLDivElement>
 }) {
   const ref = React.useRef<HTMLDivElement>(null)
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)
+
   const springX = useSpring(x, { stiffness: 300, damping: 20 })
   const springY = useSpring(y, { stiffness: 300, damping: 20 })
 
+  /* Mouse / Touch Repel Logic */
   React.useEffect(() => {
-    const handleMouseMove = () => {
+    const handleMove = () => {
       if (!ref.current) return
 
       const rect = ref.current.getBoundingClientRect()
@@ -54,33 +58,45 @@ function FloatingIcon({
         const force = (1 - distance / 150) * 50
         x.set(-dx * force * 0.01)
         y.set(-dy * force * 0.01)
-      } else {
-        x.set(0)
-        y.set(0)
       }
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMove)
+    window.addEventListener('touchmove', handleMove)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMove)
+      window.removeEventListener('touchmove', handleMove)
+    }
   }, [mouseX, mouseY, x, y])
 
   return (
     <motion.div
       ref={ref}
       style={{ x: springX, y: springY }}
+      drag
+      dragConstraints={dragConstraints}
+      dragElastic={0.45}
+      dragMomentum={true}
+      whileTap={{ scale: 1.12 }}
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.06, duration: 0.5 }}
-      className={cn('absolute', iconData.className)}
+      className={cn(
+        'absolute touch-none cursor-grab active:cursor-grabbing',
+        iconData.className
+      )}
     >
+      {/* Continuous floating animation */}
       <motion.div
         className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-card/80 backdrop-blur-md border border-border/10 shadow-xl"
         animate={{
-          y: [0, -8, 0, 8, 0],
-          rotate: [0, 5, 0, -5, 0],
+          y: [0, -12, 0, 12, 0],
+          x: [0, 6, 0, -6, 0],
+          rotate: [0, 6, 0, -6, 0],
         }}
         transition={{
-          duration: 6 + Math.random() * 4,
+          duration: 4,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
@@ -103,6 +119,7 @@ function FloatingIconsHero({
 }: FloatingIconsHeroProps & { className?: string }) {
   const mouseX = React.useRef(0)
   const mouseY = React.useRef(0)
+  const containerRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <section
@@ -110,12 +127,17 @@ function FloatingIconsHero({
         mouseX.current = e.clientX
         mouseY.current = e.clientY
       }}
+      onTouchMove={(e) => {
+        mouseX.current = e.touches[0].clientX
+        mouseY.current = e.touches[0].clientY
+      }}
       className={cn(
         'relative w-full h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-background',
         className
       )}
     >
-      <div className="absolute inset-0">
+      {/* Floating Icons Layer */}
+      <div ref={containerRef} className="absolute inset-0">
         {icons.map((icon, index) => (
           <FloatingIcon
             key={icon.id}
@@ -123,17 +145,21 @@ function FloatingIconsHero({
             mouseY={mouseY}
             iconData={icon}
             index={index}
+            dragConstraints={containerRef}
           />
         ))}
       </div>
 
+      {/* Foreground Content */}
       <div className="relative z-10 text-center px-4">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
           {title}
         </h1>
+
         <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground">
           {subtitle}
         </p>
+
         <div className="mt-10">
           <Button asChild size="lg">
             <a href={ctaHref}>{ctaText}</a>

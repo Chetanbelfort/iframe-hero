@@ -2,7 +2,7 @@
 
 import FloatingIconsHero, {
   type FloatingIconsHeroProps,
-} from "@/components/ui/floating-icons-hero-section"
+} from '@/components/ui/floating-icons-hero-section'
 
 import {
   Brain,
@@ -13,42 +13,36 @@ import {
   LineChart,
   Database,
   Cloud,
-  ShieldCheck,
   Rocket,
-  Cpu,
-  Network,
-  Layers,
-  Settings,
-  Gauge,
-  Puzzle,
-} from "lucide-react"
+} from 'lucide-react'
 
-const icons: FloatingIconsHeroProps["icons"] = [
-  { id: 1, icon: Brain, className: "top-[8%] left-[10%]" },
-  { id: 2, icon: Bot, className: "top-[18%] right-[10%]" },
-  { id: 3, icon: Workflow, className: "top-[70%] left-[12%]" },
-  { id: 4, icon: Zap, className: "bottom-[12%] right-[10%]" },
+/* -------------------------------- ICON CONFIG -------------------------------- */
+/*
+  🔑 RULE:
+  - Icons WITHOUT `hidden sm:block` → visible on mobile + desktop
+  - Icons WITH `hidden sm:block`   → hidden on mobile, visible on desktop
+*/
 
-  { id: 5, icon: IndianRupee, className: "top-[40%] left-[6%]" },
-  { id: 6, icon: LineChart, className: "top-[55%] right-[6%]" },
+const icons: FloatingIconsHeroProps['icons'] = [
+  // ✅ MOBILE + DESKTOP ICONS (6–8 max)
+  { id: 1, icon: Brain, className: 'top-[10%] left-[10%]' },
+  { id: 2, icon: Bot, className: 'top-[20%] right-[10%]' },
+  { id: 3, icon: Workflow, className: 'top-[70%] left-[12%]' },
+  { id: 4, icon: Zap, className: 'bottom-[15%] right-[12%]' },
+  { id: 5, icon: IndianRupee, className: 'top-[45%] left-[6%]' },
+  { id: 6, icon: LineChart, className: 'top-[55%] right-[6%]' },
 
-  { id: 7, icon: Cpu, className: "top-[5%] left-[35%]" },
-  { id: 8, icon: Network, className: "top-[5%] right-[35%]" },
+  // 🖥️ DESKTOP-ONLY ICONS
+  { id: 7, icon: Cloud, className: 'hidden sm:block top-[5%] left-[35%]' },
+  { id: 8, icon: Rocket, className: 'hidden sm:block top-[80%] right-[45%]' },
 
-  { id: 9, icon: Database, className: "top-[75%] right-[30%]" },
-  { id: 10, icon: Cloud, className: "top-[75%] left-[30%]" },
-
-  { id: 11, icon: Settings, className: "top-[25%] left-[20%]" },
-  { id: 12, icon: Layers, className: "top-[25%] right-[20%]" },
-
-  { id: 13, icon: ShieldCheck, className: "bottom-[6%] left-[45%]" },
-  { id: 14, icon: Gauge, className: "top-[90%] right-[45%]" },
-
-  { id: 15, icon: Puzzle, className: "top-[60%] left-[20%]" },
-  { id: 16, icon: Rocket, className: "top-[60%] right-[20%]" },
+  // 👇 THIS IS YOUR EXACT LINE (DESKTOP ONLY)
+  { id: 9, icon: Database, className: 'hidden sm:block top-[70%] left-[30%]' },
 ]
 
-function HeroSection() {
+/* -------------------------------- HERO -------------------------------- */
+
+export default function HeroSection() {
   return (
     <FloatingIconsHero
       title="ALL India AI"
@@ -59,5 +53,3 @@ function HeroSection() {
     />
   )
 }
-
-export default HeroSection
