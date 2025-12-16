@@ -11,10 +11,6 @@ interface IconProps {
 }
 
 export interface FloatingIconsHeroProps {
-  title: string
-  subtitle: string
-  ctaText: string
-  ctaHref: string
   icons: IconProps[]
 }
 
@@ -87,7 +83,7 @@ export default function FloatingIconsHero({
     >
       {/* BRAND */}
       <div className="absolute top-5 left-1/2 -translate-x-1/2 z-20">
-        <span className="text-xs tracking-[0.2em] text-black/50 font-medium">
+        <span className="text-xs tracking-[0.25em] text-black/50 font-medium">
           ALL INDIA AI
         </span>
       </div>
@@ -101,30 +97,35 @@ export default function FloatingIconsHero({
 
       {/* CONTENT */}
       <div className="relative z-10 max-w-3xl text-center px-6">
-        {/* HEADLINE */}
+        {/* MAIN HEADING */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-black tracking-tight leading-tight">
-          Build once.
-          <br />
-          Deliver AI everywhere.
+          Build Your Own AI Services Business
         </h1>
 
-        {/* SUBLINE */}
-        <p className="mt-4 text-lg sm:text-xl md:text-2xl text-black/60 font-normal">
-          Without learning AI, automation tools, or technical systems.
+        {/* SMALLER LINE */}
+        <p className="mt-3 text-lg sm:text-xl md:text-2xl text-black/60">
+          Without learning AI, coding, or tools.
         </p>
 
-        {/* DESCRIPTION */}
-        <p className="mt-8 text-base sm:text-lg text-black/70 leading-relaxed">
-          We design, build, and operate AI agents for your clients.
+        {/* SUB-HEADLINE (LIFE RELIEF) */}
+        <p className="mt-10 text-base sm:text-lg text-black/70 leading-relaxed">
+          A ready-made AI business model where you bring clients,
           <br />
-          You focus on relationships. We take care of the technology.
+          and we build, manage, and fix everything for you — end to end.
         </p>
 
-        {/* SUPPORTING STATEMENT */}
-        <p className="mt-4 text-sm sm:text-base text-black/50 italic">
-          Not a course. Not a platform.
+        {/* BULLET RELIEF */}
+        <div className="mt-6 text-sm sm:text-base text-black/60 leading-relaxed">
+          <p>No tech learning.</p>
+          <p>No backend work.</p>
+          <p>No trial-and-error.</p>
+        </div>
+
+        {/* SUPPORTING LINE */}
+        <p className="mt-6 text-sm sm:text-base text-black/50 italic">
+          This is not a course.
           <br />
-          A fully managed AI delivery partnership.
+          This is an authorized partner / franchise-style AI business.
         </p>
 
         {/* CTA */}
@@ -144,7 +145,7 @@ export default function FloatingIconsHero({
             "
           >
             <a href="/partner" target="_parent">
-              Become a Partner
+              Apply to Become an Authorized Partner
             </a>
           </Button>
 
@@ -162,8 +163,8 @@ export default function FloatingIconsHero({
               w-full sm:w-auto
             "
           >
-            <a href="/ai-agents" target="_parent">
-              Build AI for My Business
+            <a href="/partner-model" target="_parent">
+              See How the Partner Model Works
             </a>
           </Button>
         </div>
