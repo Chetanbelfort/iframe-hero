@@ -1,79 +1,63 @@
 'use client'
 
-import { Spotlight } from "@/components/ui/spotlight"
-import { SplineScene } from "@/components/ui/spline"
-import { RetroGrid } from "@/components/ui/retro-grid"
-import { ArrowRight, Sparkles } from "lucide-react"
+import FloatingIconsHero, {
+  type FloatingIconsHeroProps,
+} from "@/components/ui/floating-icons-hero-section"
 
-export default function HeroSection() {
+import {
+  Brain,
+  Bot,
+  Workflow,
+  Zap,
+  IndianRupee,
+  LineChart,
+  Database,
+  Cloud,
+  ShieldCheck,
+  Rocket,
+  Cpu,
+  Network,
+  Layers,
+  Settings,
+  Gauge,
+  Puzzle,
+} from "lucide-react"
+
+const icons: FloatingIconsHeroProps["icons"] = [
+  { id: 1, icon: Brain, className: "top-[8%] left-[10%]" },
+  { id: 2, icon: Bot, className: "top-[18%] right-[10%]" },
+  { id: 3, icon: Workflow, className: "top-[70%] left-[12%]" },
+  { id: 4, icon: Zap, className: "bottom-[12%] right-[10%]" },
+
+  { id: 5, icon: IndianRupee, className: "top-[40%] left-[6%]" },
+  { id: 6, icon: LineChart, className: "top-[55%] right-[6%]" },
+
+  { id: 7, icon: Cpu, className: "top-[5%] left-[35%]" },
+  { id: 8, icon: Network, className: "top-[5%] right-[35%]" },
+
+  { id: 9, icon: Database, className: "top-[75%] right-[30%]" },
+  { id: 10, icon: Cloud, className: "top-[75%] left-[30%]" },
+
+  { id: 11, icon: Settings, className: "top-[25%] left-[20%]" },
+  { id: 12, icon: Layers, className: "top-[25%] right-[20%]" },
+
+  { id: 13, icon: ShieldCheck, className: "bottom-[6%] left-[45%]" },
+  { id: 14, icon: Gauge, className: "top-[90%] right-[45%]" },
+
+  { id: 15, icon: Puzzle, className: "top-[60%] left-[20%]" },
+  { id: 16, icon: Rocket, className: "top-[60%] right-[20%]" },
+]
+
+function HeroSection() {
   return (
-    <section className="relative w-screen min-h-screen bg-black overflow-hidden">
-
-      {/* Background Effects */}
-      <RetroGrid />
-      <Spotlight className="-top-40 left-1/2 -translate-x-1/2 md:left-60 md:-top-20 opacity-70" />
-
-      {/* TOP BRAND */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-30">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide bg-gradient-to-r from-white via-neutral-300 to-white bg-clip-text text-transparent">
-          ALL India AI
-        </h2>
-      </div>
-
-      {/* MAIN GRID */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 min-h-screen">
-
-        {/* LEFT */}
-        <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-20 py-24 text-center md:text-left">
-
-          <div className="flex items-center justify-center md:justify-start gap-2 text-xs sm:text-sm text-neutral-400 mb-4">
-            <Sparkles className="h-4 w-4" />
-            Done-For-You AI Partner System
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent">
-            Build & Sell AI Agent Solutions
-            <br />
-            Without Learning AI, Coding, or n8n
-          </h1>
-
-          <p className="mt-6 text-neutral-300 text-base sm:text-lg max-w-xl mx-auto md:mx-0">
-            We build, manage, and support AI agents for your clients.
-            <br className="hidden sm:block" />
-            You focus on sales. We handle everything technical — end-to-end.
-          </p>
-
-          <p className="mt-4 text-neutral-400 italic text-sm sm:text-base">
-            This is not a course. This is a done-for-you AI delivery system.
-          </p>
-
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center sm:items-start">
-            <button
-              className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-black font-semibold hover:bg-neutral-200 transition"
-              onClick={() => window.open("https://yourwordpresssite.com/partner", "_parent")}
-            >
-              Become an Authorized Partner
-              <ArrowRight className="h-4 w-4" />
-            </button>
-
-            <button
-              className="inline-flex items-center rounded-lg border border-neutral-700 px-6 py-3 text-white hover:bg-neutral-900 transition"
-              onClick={() => window.open("https://yourwordpresssite.com/ai-agents", "_parent")}
-            >
-              Get AI Agents Built
-            </button>
-          </div>
-        </div>
-
-        {/* RIGHT */}
-        <div className="relative hidden md:block">
-          <SplineScene
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full"
-          />
-        </div>
-
-      </div>
-    </section>
+    <FloatingIconsHero
+      title="ALL India AI"
+      subtitle="Build, automate, and sell AI agents, workflows, and business automation systems — without coding."
+      ctaText="Become an AI Partner"
+      ctaHref="/partner"
+      icons={icons}
+    />
   )
 }
+
+export default HeroSection
