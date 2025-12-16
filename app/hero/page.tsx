@@ -1,5 +1,11 @@
 import HeroSection from "@/components/sections/HeroSection"
+import StuckRealitySection from "@/components/sections/StuckRealitySection"
 
-export default function HomePage() {
-  return <HeroSection />
+export default function Page() {
+  return (
+    <>
+      <HeroSection />
+      <StuckRealitySection />
+    </>
+  )
 }
