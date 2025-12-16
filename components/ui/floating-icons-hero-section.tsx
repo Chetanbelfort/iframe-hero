@@ -46,7 +46,7 @@ function FloatingIcon({
           rounded-3xl
           bg-white
           border border-black/10
-          shadow-[0_20px_40px_rgba(0,0,0,0.08)]
+          shadow-[0_25px_50px_rgba(0,0,0,0.08)]
           flex items-center justify-center
         "
         animate={{
@@ -71,19 +71,28 @@ export default function FloatingIconsHero({
   icons,
 }: FloatingIconsHeroProps) {
   return (
-    <section
-      className="
-        relative
-        w-full
-        min-h-[100svh]
-        bg-white
-        overflow-hidden
-        flex items-center justify-center
-      "
-    >
+    <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center justify-center bg-white">
+      
+      {/* AIR BACKGROUND */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
+        style={{
+          background:
+            'radial-gradient(1200px 600px at 20% 30%, rgba(0,0,0,0.04), transparent 60%), radial-gradient(1000px 500px at 80% 70%, rgba(0,0,0,0.03), transparent 55%)',
+        }}
+      />
+
       {/* BRAND */}
-      <div className="absolute top-5 left-1/2 -translate-x-1/2 z-20">
-        <span className="text-xs tracking-[0.25em] text-black/50 font-medium">
+      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20">
+        <span className="text-[11px] tracking-[0.35em] text-black/50 font-medium">
           ALL INDIA AI
         </span>
       </div>
@@ -97,29 +106,24 @@ export default function FloatingIconsHero({
 
       {/* CONTENT */}
       <div className="relative z-10 max-w-3xl text-center px-6">
-        {/* MAIN HEADING */}
+        
+        {/* MAIN HEADLINE */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-black tracking-tight leading-tight">
           Build Your Own AI Services Business
         </h1>
 
-        {/* SMALLER LINE */}
-        <p className="mt-3 text-lg sm:text-xl md:text-2xl text-black/60">
-          Without learning AI, coding, or tools.
+        {/* SECOND LINE */}
+        <p className="mt-4 text-lg sm:text-xl md:text-2xl text-black/60">
+          Without learning AI, agents, coding, n8n, or tools.
         </p>
 
-        {/* SUB-HEADLINE (LIFE RELIEF) */}
+        {/* LIFE-RELIEF FRAME */}
         <p className="mt-10 text-base sm:text-lg text-black/70 leading-relaxed">
           A ready-made AI business model where you bring clients,
           <br />
-          and we build, manage, and fix everything for you — end to end.
+          and we build, manage, and fix AI agents, micro-SaaS AI apps,
+          and AI solutions for you — end to end.
         </p>
-
-        {/* BULLET RELIEF */}
-        <div className="mt-6 text-sm sm:text-base text-black/60 leading-relaxed">
-          <p>No tech learning.</p>
-          <p>No backend work.</p>
-          <p>No trial-and-error.</p>
-        </div>
 
         {/* SUPPORTING LINE */}
         <p className="mt-6 text-sm sm:text-base text-black/50 italic">
@@ -129,7 +133,8 @@ export default function FloatingIconsHero({
         </p>
 
         {/* CTA */}
-        <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          
           {/* PRIMARY */}
           <Button
             asChild
@@ -137,10 +142,12 @@ export default function FloatingIconsHero({
             className="
               bg-black text-white
               px-12 py-6
-              text-base sm:text-lg
               rounded-full
-              shadow-md
-              hover:bg-black/90
+              text-base sm:text-lg
+              shadow-lg
+              transition-all
+              hover:scale-[1.03]
+              hover:shadow-xl
               w-full sm:w-auto
             "
           >
@@ -153,13 +160,15 @@ export default function FloatingIconsHero({
           <Button
             asChild
             size="lg"
-            variant="outline"
             className="
-              border-black/30 text-black
+              bg-black text-white
               px-12 py-6
-              text-base sm:text-lg
               rounded-full
-              hover:bg-black/5
+              text-base sm:text-lg
+              shadow-md
+              transition-all
+              hover:scale-[1.03]
+              hover:shadow-lg
               w-full sm:w-auto
             "
           >
