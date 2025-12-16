@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
 interface IconProps {
@@ -31,20 +30,20 @@ function FloatingIcon({
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  const springX = useSpring(x, { stiffness: 120, damping: 18 })
-  const springY = useSpring(y, { stiffness: 120, damping: 18 })
+  const springX = useSpring(x, { stiffness: 110, damping: 18 })
+  const springY = useSpring(y, { stiffness: 110, damping: 18 })
 
   return (
     <motion.div
-      style={{ x: springX, y: springY }}
       drag
       dragMomentum
-      dragElastic={0.8}
+      dragElastic={0.85}
       whileTap={{ scale: 1.15 }}
+      style={{ x: springX, y: springY }}
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05 }}
-      className={cn('absolute cursor-grab active:cursor-grabbing', iconData.className)}
+      className={`absolute cursor-grab active:cursor-grabbing ${iconData.className}`}
     >
       <motion.div
         className="
@@ -54,6 +53,7 @@ function FloatingIcon({
           border border-black/10
           shadow-xl
           flex items-center justify-center
+          pointer-events-auto
         "
         animate={{
           y: [0, -10, 0, 10, 0],
@@ -84,22 +84,27 @@ export default function FloatingIconsHero({
     <section
       className="
         relative
-        w-screen h-[100svh]
+        w-full
+        min-h-[100svh]
         bg-white
         overflow-hidden
         flex items-center justify-center
-        isolate
+        touch-pan-y
+        overscroll-none
       "
+      style={{
+        WebkitOverflowScrolling: 'touch',
+      }}
     >
       {/* ICON LAYER */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-auto">
         {icons.map((icon, index) => (
           <FloatingIcon key={icon.id} iconData={icon} index={index} />
         ))}
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 text-center px-4">
+      <div className="relative z-10 text-center px-4 pointer-events-auto">
         <h1 className="text-5xl md:text-7xl font-bold text-black">
           {title}
         </h1>
@@ -112,9 +117,16 @@ export default function FloatingIconsHero({
           <Button
             asChild
             size="lg"
-            className="bg-black text-white px-10 py-6 shadow-lg"
+            className="
+              bg-black text-white
+              px-10 py-6
+              shadow-lg
+              hover:bg-black/90
+            "
           >
-            <a href={ctaHref}>{ctaText}</a>
+            <a href={ctaHref} target="_parent">
+              {ctaText}
+            </a>
           </Button>
         </div>
       </div>
