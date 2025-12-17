@@ -18,24 +18,24 @@ export function VerticalTextStack() {
         {items.map((text, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{
-              duration: 0.45,
+              duration: 0.5,
               ease: 'easeOut',
-              delay: index * 0.07,
+              delay: index * 0.08,
             }}
             className="
               bg-white
               border border-black/5
-              rounded-xl
-              px-5 py-4
+              rounded-2xl
+              px-6 py-4
               text-base md:text-lg
               text-black/70
               leading-relaxed
               text-center
-              shadow-[0_8px_24px_rgba(0,0,0,0.04)]
+              shadow-[0_6px_20px_rgba(0,0,0,0.06)]
             "
           >
             {text}
