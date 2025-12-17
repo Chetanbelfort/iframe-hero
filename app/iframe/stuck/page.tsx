@@ -1,5 +1,5 @@
-import StuckRealitySection from "@/components/sections/StuckRealitySection"
+import StuckRealitySection from '@/components/sections/StuckRealitySection'
 
-export default function StuckPage() {
+export default function Page() {
   return <StuckRealitySection />
 }
