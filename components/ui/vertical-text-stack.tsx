@@ -14,24 +14,28 @@ const items = [
 export function VerticalTextStack() {
   return (
     <div className="max-w-3xl mx-auto px-6">
-      <div className="flex flex-col gap-4 md:gap-5">
+      <div className="flex flex-col gap-3 md:gap-4">
         {items.map((text, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{
               duration: 0.45,
               ease: 'easeOut',
-              delay: index * 0.06,
+              delay: index * 0.07,
             }}
             className="
-              text-base
-              md:text-lg
+              bg-white
+              border border-black/5
+              rounded-xl
+              px-5 py-4
+              text-base md:text-lg
               text-black/70
               leading-relaxed
               text-center
+              shadow-[0_8px_24px_rgba(0,0,0,0.04)]
             "
           >
             {text}
