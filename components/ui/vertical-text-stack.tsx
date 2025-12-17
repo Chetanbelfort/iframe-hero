@@ -1,47 +1,28 @@
-'use client'
+import { GlowEffect } from '@/components/ui/glow-effect'
+import { VerticalTextStack } from '@/components/ui/vertical-text-stack'
 
-import { motion } from 'framer-motion'
-
-const items = [
-  "You’ve learned skills… but income is inconsistent",
-  "You depend on yourself for everything",
-  "You start things, but scaling feels impossible",
-  "Every few months there’s a new tool, a new course, a new promise",
-  "You know AI is big — but you don’t want to gamble your reputation",
-  "You’re tired of “trying”, “testing”, and “figuring it out alone”",
-]
-
-export function VerticalTextStack() {
+export default function StuckRealitySection() {
   return (
-    <div className="max-w-3xl mx-auto px-6">
-      <div className="flex flex-col gap-3 md:gap-4">
-        {items.map((text, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.5,
-              ease: 'easeOut',
-              delay: index * 0.08,
-            }}
-            className="
-              bg-white
-              border border-black/5
-              rounded-2xl
-              px-6 py-4
-              text-base md:text-lg
-              text-black/70
-              leading-relaxed
-              text-center
-              shadow-[0_6px_20px_rgba(0,0,0,0.06)]
-            "
-          >
-            {text}
-          </motion.div>
-        ))}
+    <section className="relative bg-white py-20 overflow-hidden">
+      <GlowEffect
+        colors={['#EAF2FF', '#F4ECFF', '#FFF3E6']}
+        blur="strong"
+        scale={1.25}
+        className="opacity-25"
+      />
+
+      <div className="relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-10 px-6">
+          <h2 className="text-4xl md:text-5xl font-semibold text-black">
+            Let’s be honest — quietly.
+          </h2>
+          <p className="mt-4 text-lg text-black/60">
+            This is where most capable people are stuck today:
+          </p>
+        </div>
+
+        <VerticalTextStack />
       </div>
-    </div>
+    </section>
   )
 }
