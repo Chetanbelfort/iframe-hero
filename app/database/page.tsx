@@ -1,5 +1,5 @@
-import HeroSection from '@/components/sections/HeroSection'
+import DatabaseSection from '@/components/sections/DatabaseSection'
 
-export default function HomePage() {
-  return <HeroSection />
+export default function DatabasePage() {
+  return <DatabaseSection />
 }
