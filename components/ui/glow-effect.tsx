@@ -1,7 +1,8 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { motion, Transition } from 'motion/react'
+import { motion } from 'motion/react'
+import type { Transition } from 'motion/react'
 
 export type GlowEffectProps = {
   className?: string
@@ -68,17 +69,13 @@ export function GlowEffect({
   }
 
   return (
-    <motion.div
-      animate={animations[mode]}
-      style={{
-        ...style,
-        '--scale': scale,
-      } as React.CSSProperties}
-      className={cn(
-        'pointer-events-none absolute inset-0 h-full w-full transform-gpu',
-        blurMap[blur],
-        className
-      )}
-    />
-  )
+  <motion.div
+    animate={animations[mode]}
+    className={cn(
+      'absolute inset-0 h-full w-full',
+      'opacity-100 blur-2xl',   // 👈 FORCE VISIBILITY
+      className
+    )}
+  />
+ )
 }
