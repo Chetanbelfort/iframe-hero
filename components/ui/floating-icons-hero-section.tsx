@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { Button } from '@/components/ui/button'
 
 interface IconProps {
   id: number
@@ -14,7 +13,7 @@ export interface FloatingIconsHeroProps {
   icons: IconProps[]
 }
 
-/* ---------------- ICON ---------------- */
+/* ---------------- FLOATING ICON ---------------- */
 
 function FloatingIcon({
   iconData,
@@ -38,7 +37,7 @@ function FloatingIcon({
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.05 }}
-      className={`absolute cursor-grab active:cursor-grabbing ${iconData.className}`}
+      className={`absolute cursor-grab active:cursor-grabbing pointer-events-auto ${iconData.className}`}
     >
       <motion.div
         className="
@@ -67,57 +66,53 @@ function FloatingIcon({
 
 /* ---------------- HERO ---------------- */
 
-export default function FloatingIconsHero({
-  icons,
-}: FloatingIconsHeroProps) {
+export default function FloatingIconsHero({ icons }: FloatingIconsHeroProps) {
   return (
-    <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center justify-center bg-white">
-      
-      {/* AIR BACKGROUND */}
+    <section className="relative w-full min-h-[100svh] bg-white overflow-hidden flex items-center justify-center">
+
+      {/* SOFT AIR BACKGROUND */}
       <motion.div
-        className="absolute inset-0"
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
         animate={{
           backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
         }}
         transition={{
-          duration: 30,
+          duration: 40,
           repeat: Infinity,
           ease: 'linear',
         }}
         style={{
           background:
-            'radial-gradient(1200px 600px at 20% 30%, rgba(0,0,0,0.04), transparent 60%), radial-gradient(1000px 500px at 80% 70%, rgba(0,0,0,0.03), transparent 55%)',
+            'radial-gradient(1200px 600px at 20% 30%, rgba(0,0,0,0.035), transparent 60%), radial-gradient(1000px 500px at 80% 70%, rgba(0,0,0,0.025), transparent 55%)',
         }}
       />
 
       {/* BRAND */}
-      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
         <span className="text-[11px] tracking-[0.35em] text-black/50 font-medium">
           ALL INDIA AI
         </span>
       </div>
 
       {/* ICON LAYER */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         {icons.map((icon, index) => (
           <FloatingIcon key={icon.id} iconData={icon} index={index} />
         ))}
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-3xl text-center px-6">
-        
-        {/* MAIN HEADLINE */}
+      <div className="relative z-10 max-w-3xl text-center px-6 pointer-events-auto">
+
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-black tracking-tight leading-tight">
           Build Your Own AI Services Business
         </h1>
 
-        {/* SECOND LINE */}
         <p className="mt-4 text-lg sm:text-xl md:text-2xl text-black/60">
           Without learning AI, agents, coding, n8n, or tools.
         </p>
 
-        {/* LIFE-RELIEF FRAME */}
         <p className="mt-10 text-base sm:text-lg text-black/70 leading-relaxed">
           A ready-made AI business model where you bring clients,
           <br />
@@ -125,57 +120,53 @@ export default function FloatingIconsHero({
           and AI solutions for you — end to end.
         </p>
 
-        {/* SUPPORTING LINE */}
         <p className="mt-6 text-sm sm:text-base text-black/50 italic">
           This is not a course.
           <br />
           This is an authorized partner / franchise-style AI business.
         </p>
 
-        {/* CTA */}
-        <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center items-center">
-          
-          {/* PRIMARY */}
-          <Button
-            asChild
-            size="lg"
+        {/* CTA BUTTONS */}
+        <div className="mt-14 flex flex-col sm:flex-row gap-4 justify-center">
+
+          <a
+            href="/partner"
+            target="_parent"
             className="
+              inline-flex items-center justify-center
               bg-black text-white
               px-12 py-6
               rounded-full
               text-base sm:text-lg
               shadow-lg
               transition-all
-              hover:scale-[1.03]
-              hover:shadow-xl
+              hover:scale-[1.04]
+              hover:shadow-2xl
               w-full sm:w-auto
             "
           >
-            <a href="/partner" target="_parent">
-              Apply to Become an Authorized Partner
-            </a>
-          </Button>
+            Apply to Become an Authorized Partner
+          </a>
 
-          {/* SECONDARY */}
-          <Button
-            asChild
-            size="lg"
+          <a
+            href="/partner-model"
+            target="_parent"
             className="
+              inline-flex items-center justify-center
               bg-black text-white
               px-12 py-6
               rounded-full
               text-base sm:text-lg
               shadow-md
               transition-all
-              hover:scale-[1.03]
-              hover:shadow-lg
+              hover:scale-[1.04]
+              hover:shadow-xl
               w-full sm:w-auto
             "
           >
-            <a href="/partner-model" target="_parent">
-              See How the Partner Model Works
-            </a>
-          </Button>
+            See How the Partner Model Works
+          </a>
+
         </div>
       </div>
     </section>
