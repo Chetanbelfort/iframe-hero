@@ -36,17 +36,18 @@ export default function DatabaseSection() {
       <div className="flex justify-center px-6">
         <DatabaseWithRestApi
           title="Everything else is handled by us"
+          circleText="AI"
+          lightColor="#00A6F5"   {/* ✅ REQUIRED FIX */}
           badgeTexts={{
             first: 'AI Agents',
-            second: 'Automations',
-            third: 'Integrations',
-            fourth: 'Support',
+            second: 'WhatsApp AI',
+            third: 'Automations',
+            fourth: 'Integrations',
           }}
           buttonTexts={{
             first: 'Delivery Team',
             second: 'Live Systems',
           }}
-          circleText="AI"
         />
       </div>
 
