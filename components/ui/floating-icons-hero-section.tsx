@@ -176,7 +176,7 @@ export default function FloatingIconsHero({
             "
           >
             <a href="/partner-model" target="_parent">
-              See How the Partner Model Works
+              Get AI Agents Built for My Business
             </a>
           </Button>
         </div>
