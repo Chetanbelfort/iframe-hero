@@ -5,7 +5,7 @@ export default function IframeLayout({
 }) {
   return (
     <html>
-      <body style={{ margin: 0, background: '#ffffff' }}>
+      <body style={{ margin: 0, background: 'transparent' }}>
         {children}
       </body>
     </html>
